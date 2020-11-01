@@ -1,0 +1,74 @@
+{
+  "tests": [
+    {
+      "name": "代码规范",
+      "setup": "sudo -H pip3 install flake8",
+      "run": "flake8 . --count --show-source --statistics",
+      "input": "",
+      "output": "",
+      "comparison": "included",
+      "timeout": 10,
+      "points": 1
+    },
+    {
+      "name": "实现命令行解析，通过正确示例测试",
+      "setup": "sudo -H pip3 install pytest",
+      "run": "pytest -k \"test_cli_ok\"",
+      "input": "",
+      "output": "",
+      "comparison": "included",
+      "timeout": 10,
+      "points": 3
+    },
+    {
+      "name": "board_grid 参数设置",
+      "setup": "sudo -H pip3 install pytest",
+      "run": "pytest -k \"test_cli_board_grid\"",
+      "input": "",
+      "output": "",
+      "comparison": "included",
+      "timeout": 10,
+      "points": 1
+    },
+    {
+      "name": "unit_grid 参数设置",
+      "setup": "sudo -H pip3 install pytest",
+      "run": "pytest -k \"test_cli_unit_grid\"",
+      "input": "",
+      "output": "",
+      "comparison": "included",
+      "timeout": 10,
+      "points": 1
+    },
+    {
+      "name": "unit_n 参数设置",
+      "setup": "sudo -H pip3 install pytest",
+      "run": "pytest -k \"test_cli_unit_n\"",
+      "input": "",
+      "output": "",
+      "comparison": "included",
+      "timeout": 10,
+      "points": 1
+    },
+    {
+      "name": "poisitions 参数设置",
+      "setup": "sudo -H pip3 install pytest",
+      "run": "pytest -k \"test_cli_postitions\"",
+      "input": "",
+      "output": "",
+      "comparison": "included",
+      "timeout": 10,
+      "points": 1
+    },
+    {
+      "name": "outdir 与 file_name 参数设置，正确生成文件",
+      "setup": "sudo -H pip3 install pytest",
+      "run": "pytest -k \"test_outdir\"",
+      "input": "",
+      "output": "",
+      "comparison": "included",
+      "timeout": 10,
+      "points": 2
+    }
+  ]
+}
