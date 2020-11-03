@@ -33,17 +33,15 @@ def create_args():
 
 def check_args(args):
     """参数检查 """
+
     if (args.board_grid % args.unit_grid) != 0:
-        print('布局板分辨率不能整除组件分辨率！')
         sys.exit(1)
 
     if len(args.positions) != args.unit_n:
-        print('组件位置与数量不一致！')
         sys.exit(1)
 
     n_limit = (args.board_grid // args.unit_grid) ** 2
     if min(args.positions) < 1 or max(args.positions) > n_limit:
-        print('组件位置编号不在规定范围内！')
         sys.exit(1)
 
 
@@ -60,8 +58,7 @@ def main():
     # 判断文件是否存在，不存在则创建
     file_types = ['mat', 'jpg']
     for file_type in file_types:
-        file_path = '{outdir}/{fname}.{ftype}'.format(
-                    outdir=outdir, fname=args.file_name, ftype=file_type)
+        file_path = '{}/{}.{}'.format(outdir, args.file_name, file_type)
         if not os.path.exists(file_path):
             os.mknod(file_path)
 
