@@ -1,6 +1,10 @@
-#!/usr/bin/python
+#!/usr/bin/python3
 # -*- coding: UTF-8 -*-
 
+
+"""
+作业一
+"""
 
 import os
 import sys
@@ -8,6 +12,7 @@ import argparse
 
 
 def create_args():
+    """创建argparser解析器 """
     parser = argparse.ArgumentParser() #创建实例对象
     parser.add_argument('--board_grid', default=100, type=int,
                         help='布局板分辨率，代表矩形区域的边长像素数')
@@ -40,9 +45,10 @@ def check_args(args):
     if min(args.positions) < 1 or max(args.positions) > n_limit:
         print('组件位置编号不在规定范围内！')
         sys.exit(1)
-    
+
 
 def main():
+    """主函数"""
     args = create_args()
     check_args(args)
 
@@ -50,7 +56,7 @@ def main():
     outdir = args.outdir.rstrip('/').rstrip('\\')
     if not os.path.exists(outdir):
         os.makedirs(outdir)
-    
+
     # 判断文件是否存在，不存在则创建
     file_types = ['mat', 'jpg']
     for file_type in file_types:
