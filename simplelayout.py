@@ -18,7 +18,7 @@ def create_args():
     parser.add_argument('--positions', nargs='*', type=int,
                         help='组件位置')
     parser.add_argument('-o', '--outdir', default='example_dir', type=str,
-                        help='输出结果的目录，默认为当前目录下的example_dir目录； 若目录不存在程序会自行创建，支持跨平台路径')
+                        help='输出结果的目录， 若目录不存在程序会自行创建')
     parser.add_argument('--file_name', default='example', type=str,
                         help='输出文件名（不包括文件类型后缀）')
     args = parser.parse_args() # 解析
@@ -29,17 +29,17 @@ def create_args():
 def check_args(args):
     """参数检查 """
     if (args.board_grid % args.unit_grid) != 0:
+        print('布局板分辨率不能整除组件分辨率！')
         sys.exit(1)
-        # raise Exception('布局板分辨率不能整除组件分辨率！')
 
     if len(args.positions) != args.unit_n:
+        print('组件位置与数量不一致！')
         sys.exit(1)
-        # raise Exception('组件位置与数量不一致！')
 
     n_limit = (args.board_grid // args.unit_grid) ** 2
     if min(args.positions) < 1 or max(args.positions) > n_limit:
+        print('组件位置编号不在规定范围内！')
         sys.exit(1)
-        # raise Exception('组件位置编号不在规定范围内！')
     
 
 def main():
