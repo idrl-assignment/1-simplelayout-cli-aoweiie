@@ -6,46 +6,41 @@ import os
 import argparse
 
 
-parser = argparse.ArgumentParser() #创建实例对象
-parser.add_argument('--board_grid', default=100, type=int,
-                    help='布局板分辨率，代表矩形区域的边长像素数')
-parser.add_argument('--unit_grid', default=10, type=int,
-                    help='矩形组件分辨率,能被布局板分辨率整除')
-parser.add_argument('--unit_n', default=3, type=int,
-                    help='组件数量')
-parser.add_argument('--positions',  nargs='+', type=int,
-                    help='组件位置')
-parser.add_argument('-o', '--outdir', default='example_dir', type=str,
-                    help='输出结果的目录，默认为当前目录下的example_dir目录； 若目录不存在程序会自行创建，支持跨平台路径')
-parser.add_argument('--file_name', default='example', type=str,
-                    help='输出文件名（不包括文件类型后缀）')
-args = parser.parse_args() # 解析
+def create_args():
+    parser = argparse.ArgumentParser() #创建实例对象
+    parser.add_argument('--board_grid', default=100, type=int,
+                        help='布局板分辨率，代表矩形区域的边长像素数')
+    parser.add_argument('--unit_grid', default=10, type=int,
+                        help='矩形组件分辨率,能被布局板分辨率整除')
+    parser.add_argument('--unit_n', default=3, type=int,
+                        help='组件数量')
+    parser.add_argument('--positions', nargs='*', type=int,
+                        help='组件位置')
+    parser.add_argument('-o', '--outdir', default='example_dir', type=str,
+                        help='输出结果的目录，默认为当前目录下的example_dir目录； 若目录不存在程序会自行创建，支持跨平台路径')
+    parser.add_argument('--file_name', default='example', type=str,
+                        help='输出文件名（不包括文件类型后缀）')
+    args = parser.parse_args() # 解析
+
+    return args
 
 
-def check_args():
+def check_args(args):
     """参数检查 """
-    global args
-    args_error = False
     if (args.board_grid % args.unit_grid) != 0:
-        args_error = True
-        print('布局板分辨率不能整除组件分辨率！')
+        raise Exception('布局板分辨率不能整除组件分辨率！')
 
     if len(args.positions) != args.unit_n:
-        args_error = True
-        print('组件位置与数量不一致！')
+        raise Exception('组件位置与数量不一致！')
 
     n_limit = (args.board_grid // args.unit_grid) ** 2
     if min(args.positions) < 1 or max(args.positions) > n_limit:
-        args_error = True
-        print('组件位置编号不在规定范围内！')
+        raise Exception('组件位置编号不在规定范围内！')
     
-    return args_error
-
 
 def main():
-    global args
-    if check_args():
-        return
+    args = create_args()
+    check_args(args)
 
     # 检查路径是否存在，不存在则创建
     outdir = args.outdir.rstrip('/').rstrip('\\')
