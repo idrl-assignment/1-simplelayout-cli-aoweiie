@@ -3,6 +3,7 @@
 
 
 import os
+import sys
 import argparse
 
 
@@ -28,14 +29,17 @@ def create_args():
 def check_args(args):
     """参数检查 """
     if (args.board_grid % args.unit_grid) != 0:
-        raise Exception('布局板分辨率不能整除组件分辨率！')
+        sys.exit(1)
+        # raise Exception('布局板分辨率不能整除组件分辨率！')
 
     if len(args.positions) != args.unit_n:
-        raise Exception('组件位置与数量不一致！')
+        sys.exit(1)
+        # raise Exception('组件位置与数量不一致！')
 
     n_limit = (args.board_grid // args.unit_grid) ** 2
     if min(args.positions) < 1 or max(args.positions) > n_limit:
-        raise Exception('组件位置编号不在规定范围内！')
+        sys.exit(1)
+        # raise Exception('组件位置编号不在规定范围内！')
     
 
 def main():
@@ -54,7 +58,6 @@ def main():
                     outdir=outdir, fname=args.file_name, ftype=file_type)
         if not os.path.exists(file_path):
             os.mknod(file_path)
-
 
 
 if __name__ == "__main__":
