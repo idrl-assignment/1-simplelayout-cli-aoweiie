@@ -13,7 +13,7 @@ import argparse
 
 def create_args():
     """创建argparser解析器 """
-    parser = argparse.ArgumentParser() #创建实例对象
+    parser = argparse.ArgumentParser()  # 创建实例对象
     parser.add_argument('--board_grid', default=100, type=int,
                         help='布局板分辨率，代表矩形区域的边长像素数')
     parser.add_argument('--unit_grid', default=10, type=int,
@@ -26,7 +26,7 @@ def create_args():
                         help='输出结果的目录， 若目录不存在程序会自行创建')
     parser.add_argument('--file_name', default='example', type=str,
                         help='输出文件名（不包括文件类型后缀）')
-    args = parser.parse_args() # 解析
+    args = parser.parse_args()  # 解析
 
     return args
 
